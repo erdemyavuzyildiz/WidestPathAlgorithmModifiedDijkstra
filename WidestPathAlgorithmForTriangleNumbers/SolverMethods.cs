@@ -1,46 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleApp5;
 
-namespace ConsoleApp5
+namespace WidestPathAlgorithmForTriangleNumbers
 {
-   internal class Program
+   public class SolverMethods
    {
-      private static void Main(string[] args)
-      {
-         var nodeGenerator = new NodeGenerator();
-         var parsedData = nodeGenerator.DataParser(DataClass.data11);
-         var nodeTree = new NodeTree(nodeGenerator.GenerateNodeTree(parsedData));
-
-         //TestMultiple();
-
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
-         var bruteResult1 = Brute(nodeTree, comparisonType);
-         var djkstraResult1 = ModifiedDjikstra(nodeTree, comparisonType);
-      }
-
-      private static void TestMultiple()
-      {
-         var nodeGenerator = new NodeGenerator();
-
-         for (var i = 0; i < 100000; i++)
-         {
-            var randomData = nodeGenerator.RandomData(14, 1, 100);
-            var nodeTree = new NodeTree(nodeGenerator.GenerateNodeTree(randomData));
-
-            var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
-
-            var bruteResult1 = Brute(nodeTree, comparisonType);
-            var djkstraResult1 = ModifiedDjikstra(nodeTree, comparisonType);
-
-            if (bruteResult1 != djkstraResult1)
-            {
-               var printResult = TreePrinter.Print(nodeGenerator.GenerateNodeTree(randomData));
-            }
-         }
-      }
-
-      private static int ModifiedDjikstra(NodeTree treeData,
+      public static int ModifiedDjikstra(NodeTree treeData,
          DijkstraSolver.DikstraComparisonType comparisonType = DijkstraSolver.DikstraComparisonType.Shorter)
       {
          treeData.ResetCosts(comparisonType);
@@ -60,8 +27,7 @@ namespace ConsoleApp5
          return path.Last().Cost;
       }
 
-
-      private static int Brute(NodeTree nodesTree,
+      public static int Brute(NodeTree nodesTree,
          DijkstraSolver.DikstraComparisonType comparisonType = DijkstraSolver.DikstraComparisonType.Longer)
       {
          var nodeSolver = new BruteforceNodeSolver();

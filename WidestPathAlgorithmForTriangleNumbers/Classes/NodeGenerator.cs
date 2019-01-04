@@ -17,7 +17,7 @@ namespace ConsoleApp5
          return dataArray.ToArray();
       }
 
-      public int[] RandomData(int depth = 4,int rangeStart=1,int rangeEnd=5)
+      public int[] RandomData(int depth = 4, int rangeStart = 1, int rangeEnd = 5)
       {
          var random = new Random();
          var randomData = new List<int>();
@@ -33,12 +33,6 @@ namespace ConsoleApp5
 
          return randomData.ToArray();
       }
-
-     
-
-      
-
-
 
       public List<Node> GenerateNodeTree(int[] dataArray)
       {
@@ -79,14 +73,10 @@ namespace ConsoleApp5
             previousNodesCount += depth;
          }
 
-
-         foreach (var grouping in allNodes.GroupBy(z=>z.Depth))
+         foreach (var grouping in allNodes.GroupBy(z => z.Depth))
          {
-            var groupData=grouping.ToList();
-            for (int i = 0; i < groupData.Count; i++)
-            {
-               groupData[i].Index = i;
-            }
+            var groupData = grouping.ToList();
+            for (var i = 0; i < groupData.Count; i++) groupData[i].Index = i;
          }
 
          return allNodes;

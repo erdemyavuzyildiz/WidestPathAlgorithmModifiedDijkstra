@@ -14,7 +14,6 @@ namespace ConsoleApp5
       public int Depth { get; set; }
       public List<Node> ChildNodes { get; set; } = new List<Node>();
       public List<Node> ParentNodes { get; set; } = new List<Node>();
-
       public bool Visited { get; set; }
       public int Cost { get; set; }
       public int Index { get; set; }
@@ -23,7 +22,5 @@ namespace ConsoleApp5
       {
          ChildNodes.AddRange(children);
       }
-
-     
    }
 }

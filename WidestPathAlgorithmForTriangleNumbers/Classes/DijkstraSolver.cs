@@ -5,35 +5,33 @@ using System.Linq;
 namespace ConsoleApp5
 {
    /// <summary>
-   /// Dijkstra Algorithm source
-   /// https://www.youtube.com/watch?v=pVfj6mxhdMw&t=241s
+   ///    Dijkstra Algorithm source
+   ///    https://www.youtube.com/watch?v=pVfj6mxhdMw&t=241s
    /// </summary>
    public class DijkstraSolver
    {
-
       public enum DikstraComparisonType
       {
          Shorter,
          Longer
       }
 
-      public void UpdateTreeCostsByDepth(List<Node> nodes,DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      public void UpdateTreeCostsByDepth(List<Node> nodes,
+         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
       {
-         nodes.First().Cost=nodes.First().Value;
+         nodes.First().Cost = nodes.First().Value;
 
-    
+         var depths = nodes.GroupBy(z => z.Depth).Count();
 
-         var depths=nodes.GroupBy(z=>z.Depth).Count();
-
-         for (int i = 0; i < depths; i++)
-         {
-            UpdateTreeCostsByDepth(nodes,i,comparisonType);
-         }
+         for (var i = 0; i < depths; i++) UpdateTreeCostsByDepth(nodes, i, comparisonType);
       }
 
-      public void FindParentPath(Node node,List<Node> link, List<List<Node>> allPaths, DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      public void FindParentPath(Node node,
+         List<Node> link,
+         List<List<Node>> allPaths,
+         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
       {
-         var parentNodes=node.ParentNodes.OrderBy(z=>z.Cost).ToList();
+         var parentNodes = node.ParentNodes.OrderBy(z => z.Cost).ToList();
 
          if (parentNodes.Any())
          {
@@ -41,34 +39,34 @@ namespace ConsoleApp5
             switch (comparisonType)
             {
                case DikstraComparisonType.Shorter:
-                  targetParent=parentNodes[0];
+                  targetParent = parentNodes[0];
                   break;
                case DikstraComparisonType.Longer:
-                  targetParent=parentNodes[parentNodes.Count-1];
+                  targetParent = parentNodes[parentNodes.Count - 1];
                   break;
                default:
                   throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
             }
+
             var localLink = link.ToList();
             localLink.Add(targetParent);
 
-            FindParentPath(targetParent,localLink,allPaths);
-         }else
-         {
+            FindParentPath(targetParent, localLink, allPaths);
+         }
+         else
             allPaths.Add(link);
-         }
       }
-      
 
-      public void UpdateTreeCostsByDepth(List<Node> nodes,int targetDepth,DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      public void UpdateTreeCostsByDepth(List<Node> nodes,
+         int targetDepth,
+         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
       {
-         foreach (var node in nodes.Where(z=>z.Depth==targetDepth))
-         {
-            UpdateDijkstraNeighborsCosts(node,comparisonType);
-         }
+         foreach (var node in nodes.Where(z => z.Depth == targetDepth))
+            UpdateDijkstraNeighborsCosts(node, comparisonType);
       }
-      
-      public void UpdateDijkstraNeighborsCosts(Node node, DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+
+      public void UpdateDijkstraNeighborsCosts(Node node,
+         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
       {
          switch (comparisonType)
          {
@@ -121,21 +119,19 @@ namespace ConsoleApp5
       }
 
       /// <summary>
-      /// Recursively visits nodes and calculates distances as it adds the visited paths
+      ///    Recursively visits nodes and calculates distances as it adds the visited paths
       /// </summary>
       /// <param name="node"></param>
       /// <param name="link"></param>
       /// <param name="allPaths"></param>
       /// <param name="comparisonType"></param>
-      public void GetPathsDjkstra(Node node, List<Node> link, List<List<Node>> allPaths,
-         DikstraComparisonType comparisonType=DikstraComparisonType.Longer)
+      public void GetPathsDjkstra(Node node,
+         List<Node> link,
+         List<List<Node>> allPaths,
+         DikstraComparisonType comparisonType = DikstraComparisonType.Longer)
       {
-         if (!node.ParentNodes.Any())
-         {
-            node.Cost = node.Value;
-         }
+         if (!node.ParentNodes.Any()) node.Cost = node.Value;
 
-         
          //Mark this node as visited
          node.Visited = true;
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ConsoleApp5
 {
@@ -37,6 +38,28 @@ namespace ConsoleApp5
       IEnumerator IEnumerable.GetEnumerator()
       {
          return GetEnumerator();
+      }
+
+      public string Print()
+      {
+         var grouped = Nodes.GroupBy(z => z.Depth).OrderBy(z => z.Key);
+
+         var stringBuilder = new StringBuilder();
+         foreach (var grouping in grouped)
+         {
+            var groupItems = grouping.ToList();
+            for (var i = 0; i < groupItems.Count(); i++)
+            {
+               if (i == 0)
+                  stringBuilder.Append(groupItems[i].Value);
+               else
+                  stringBuilder.Append(" " + groupItems[i].Value);
+            }
+
+            stringBuilder.AppendLine();
+         }
+
+         return stringBuilder.ToString();
       }
 
       public void ResetCosts(DijkstraSolver.DikstraComparisonType comparisonType)
