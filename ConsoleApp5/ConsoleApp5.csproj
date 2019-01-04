@@ -44,8 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClass.cs" />
+    <Compile Include="DijkstraSolver.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="NodeGenerator.cs" />
+    <Compile Include="NodeSolver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreePrinter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
