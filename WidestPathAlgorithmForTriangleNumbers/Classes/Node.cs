@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleApp5
+namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
    public class Node
    {

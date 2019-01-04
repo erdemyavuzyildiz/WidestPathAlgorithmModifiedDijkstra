@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp5
+namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
    public class NodeGenerator
    {

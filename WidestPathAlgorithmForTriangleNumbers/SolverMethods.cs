@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp5;
+using WidestPathAlgorithmForTriangleNumbers.Classes;
 
 namespace WidestPathAlgorithmForTriangleNumbers
 {

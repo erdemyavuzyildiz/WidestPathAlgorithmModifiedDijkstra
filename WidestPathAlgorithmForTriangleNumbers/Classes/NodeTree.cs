@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ConsoleApp5
+namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
    public class NodeTree : IEnumerable<Node>
    {

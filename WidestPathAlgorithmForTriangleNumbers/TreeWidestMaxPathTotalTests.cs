@@ -1,5 +1,5 @@
-﻿using ConsoleApp5;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WidestPathAlgorithmForTriangleNumbers.Classes;
 
 namespace WidestPathAlgorithmForTriangleNumbers
 {

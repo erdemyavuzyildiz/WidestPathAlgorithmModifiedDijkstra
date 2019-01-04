@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp5
+﻿namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
    public static class DataClass
    {
