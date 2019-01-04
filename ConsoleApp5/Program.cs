@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ConsoleApp5
 {
@@ -16,53 +17,150 @@ namespace ConsoleApp5
       public int Depth { get; set; }
       public List<Node> ChildNodes { get; set; } = new List<Node>();
       public List<Node> ParentNodes { get; set; } = new List<Node>();
+
       public bool Visited { get; set; }
+      public int Cost { get; set; }
+      public int Index { get; set; }
 
       public void AddChildren(params Node[] children)
       {
          ChildNodes.AddRange(children);
       }
 
-      public List<Node> BestPath = new List<Node>();
-      public int BestSum { get; set; }
+     
    }
+
+   public static class TreePrinter
+   {
+      public static string Print(List<Node> allNodes)
+      {
+         var grouped = allNodes.GroupBy(z => z.Depth).OrderBy(z => z.Key);
+
+         var stringBuilder = new StringBuilder();
+         foreach (var grouping in grouped)
+         {
+            var groupItems = grouping.ToList();
+            for (var i = 0; i < groupItems.Count(); i++)
+            {
+               if (i == 0)
+                  stringBuilder.Append(groupItems[i].Value);
+               else
+                  stringBuilder.Append(" " + groupItems[i].Value);
+            }
+
+            stringBuilder.AppendLine();
+         }
+
+         return stringBuilder.ToString();
+      }
+   }
+
+   /// <summary>
+   /// Dijkstra Algorithm source
+   /// https://www.youtube.com/watch?v=pVfj6mxhdMw&t=241s
+   /// </summary>
+   public class DijkstraSolver
+   {
+
+      public enum DikstraComparisonType
+      {
+         Shorter,
+         Longer
+      }
+
+      public void UpdateDijkstraPaths(Node node, DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      {
+         switch (comparisonType)
+         {
+            case DikstraComparisonType.Shorter:
+               foreach (var nodeChildNode in node.ChildNodes.Where(x => !x.Visited))
+               {
+                  var currentNodeCost = nodeChildNode.Value + node.Cost;
+
+                  //If the path cost is more than it should, update with new shorter path
+                  if (nodeChildNode.Cost > currentNodeCost) nodeChildNode.Cost = currentNodeCost;
+               }
+
+               break;
+            case DikstraComparisonType.Longer:
+               foreach (var nodeChildNode in node.ChildNodes.Where(x => !x.Visited))
+               {
+                  var currentNodeCost = nodeChildNode.Value + node.Cost;
+
+                  //If the path cost is less than it should, update with new longer path
+                  if (nodeChildNode.Cost < currentNodeCost) nodeChildNode.Cost = currentNodeCost;
+               }
+
+               break;
+            default:
+               throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
+         }
+      }
+
+      public Node GetNextUnvisitedNode(Node node, DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      {
+         Node resultNode;
+         var unvisitedNodes = node.ChildNodes.Where(x => !x.Visited);
+
+         switch (comparisonType)
+         {
+            case DikstraComparisonType.Shorter:
+               resultNode = unvisitedNodes.OrderBy(z => z.Cost).FirstOrDefault();
+               break;
+            case DikstraComparisonType.Longer:
+               resultNode = unvisitedNodes.OrderByDescending(z => z.Cost).FirstOrDefault();
+               break;
+            default:
+               throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
+         }
+
+         return resultNode;
+      }
+
+      /// <summary>
+      /// Recursively visits nodes and calculates distances as it adds the visited paths
+      /// </summary>
+      /// <param name="node"></param>
+      /// <param name="link"></param>
+      /// <param name="allPaths"></param>
+      /// <param name="comparisonType"></param>
+      public void GetPathsDjkstra(Node node, List<Node> link, List<List<Node>> allPaths,
+         DikstraComparisonType comparisonType=DikstraComparisonType.Longer)
+      {
+         if (!node.ParentNodes.Any()) node.Cost = node.Value;
+         
+         //Mark this node as visited
+         node.Visited = true;
+
+         //Update unvisited neighbors
+         UpdateDijkstraPaths(node, comparisonType);
+
+         var nextUnvisiedNode = GetNextUnvisitedNode(node, comparisonType);
+         if (nextUnvisiedNode != null)
+         {
+            var localLink = link.ToList();
+            localLink.Add(nextUnvisiedNode);
+            GetPathsDjkstra(nextUnvisiedNode, localLink, allPaths);
+         }
+
+         if (!node.ChildNodes.Any()) allPaths.Add(link);
+      }
+   }
+   
+
 
    public class NodeSolver
    {
-
-      public void GetPathsBruteForce(Node node, int currentSum, List<Node> link, List<List<Node>> allPaths)
-      {
-         foreach (var nodeChildNode in node.ChildNodes)
-         {
-
-            var localLink = link.ToList();
-            localLink.Add(nodeChildNode);
-            GetPathsBruteForce(nodeChildNode, currentSum + nodeChildNode.Value, localLink, allPaths);
-         }
-
-         if (!node.ChildNodes.Any())
-         {
-            node.Visited=true;
-            allPaths.Add(link);
-         }
-
-      }
-
-      public void GetPathsBruteForce2(Node node, int currentSum, List<Node> link, List<List<Node>> allPaths)
+      public void GetPathsBruteForce(Node node, List<Node> link, List<List<Node>> allPaths)
       {
          foreach (var nodeChildNode in node.ChildNodes)
          {
             var localLink = link.ToList();
             localLink.Add(nodeChildNode);
-            GetPathsBruteForce2(nodeChildNode, currentSum + nodeChildNode.Value, localLink, allPaths);
+            GetPathsBruteForce(nodeChildNode, localLink, allPaths);
          }
 
-         if (!node.ChildNodes.Any())
-         {
-            node.Visited=true;
-            allPaths.Add(link);
-         }
-
+         if (!node.ChildNodes.Any()) allPaths.Add(link);
       }
 
 
@@ -99,6 +197,29 @@ namespace ConsoleApp5
 
          return dataArray.ToArray();
       }
+
+      public int[] RandomData(int depth = 4)
+      {
+         var random = new Random();
+         var randomData = new List<int>();
+
+         for (var i = 0; i < depth; i++)
+         {
+            for (var j = 0; j < i + 1; j++)
+            {
+               var randomNumber = random.Next(1, 5);
+               randomData.Add(randomNumber);
+            }
+         }
+
+         return randomData.ToArray();
+      }
+
+     
+
+      
+
+
 
       public List<Node> GenerateNodeTree(int[] dataArray)
       {
@@ -139,6 +260,16 @@ namespace ConsoleApp5
             previousNodesCount += depth;
          }
 
+
+         foreach (var grouping in allNodes.GroupBy(z=>z.Depth))
+         {
+            var groupData=grouping.ToList();
+            for (int i = 0; i < groupData.Count; i++)
+            {
+               groupData[i].Index = i;
+            }
+         }
+
          return allNodes;
       }
    }
@@ -148,18 +279,65 @@ namespace ConsoleApp5
       private static void Main(string[] args)
       {
          var nodeGenerator = new NodeGenerator();
-         var parsedData = nodeGenerator.DataParser(DataClass.data1);
+         var parsedData = nodeGenerator.DataParser(DataClass.data12);
 
-         var nodesTree = nodeGenerator.GenerateNodeTree(parsedData);
+
+
+         //TestMultiple();
+
+         var bruteResult = Brute(nodeGenerator.GenerateNodeTree(parsedData));
+         var djkstraResult = Djkstra(nodeGenerator.GenerateNodeTree(parsedData));
+      }
+
+      private static void TestMultiple()
+      {
+         var nodeGenerator = new NodeGenerator();
+
+         for (int i = 0; i < 100000; i++)
+         {
+            var randomData = nodeGenerator.RandomData(4);
+            var bruteResult1 = Brute(nodeGenerator.GenerateNodeTree(randomData));
+            var djkstraResult1 = Djkstra(nodeGenerator.GenerateNodeTree(randomData));
+
+            if (bruteResult1 != djkstraResult1)
+            {
+               
+             var printResult= TreePrinter.Print(nodeGenerator.GenerateNodeTree(randomData));
+            }
+         }
+      }
+
+      private static int Djkstra( List<Node> nodesTree)
+      {
+         var printResult= TreePrinter.Print(nodesTree);
 
          var nodeSolver = new NodeSolver();
-         var allPaths = new List<List<Node>>();
+         List<List<Node>> allPaths = new List<List<Node>>();
+         var first = nodesTree.First();
+         first.Cost = 0;
 
-         //nodeSolver.GetPathsBruteForce(nodesTree.First(), 0, new List<Node> {nodesTree.First()}, allPaths);
-         //var bestPath = allPaths.OrderByDescending(z => z.Sum(b => b.Value)).First();
+         var dijkstraSolver = new DijkstraSolver();
+         dijkstraSolver.GetPathsDjkstra(first, new List<Node> {first}, allPaths);
 
-        
+         var itemWithMaxCost= allPaths.OrderByDescending(z=>z.Last().Cost).ToList();
 
+
+         
+
+         return itemWithMaxCost.First().Last().Cost;
+      }
+
+      private static int Brute(List<Node> nodesTree)
+      {
+         var nodeSolver = new NodeSolver();
+
+         List<List<Node>> allPaths = new List<List<Node>>();
+         var firstNode=nodesTree.First();
+
+         nodeSolver.GetPathsBruteForce(firstNode, new List<Node> {nodesTree.First()}, allPaths);
+         var bestPath = allPaths.OrderByDescending(z => z.Sum(b => b.Value)).First();
+
+         return bestPath.Sum(z=>z.Value);
       }
    }
 }
