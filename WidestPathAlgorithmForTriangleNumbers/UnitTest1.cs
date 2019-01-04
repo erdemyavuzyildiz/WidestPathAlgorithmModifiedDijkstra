@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleApp5;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConsoleApp5
+namespace WidestPathAlgorithmForTriangleNumbers
 {
-   internal class Program
+   [TestClass]
+   public class UnitTest1
    {
-      private static void Main(string[] args)
+      [TestMethod]
+      public void TestMethod1()
       {
          var nodeGenerator = new NodeGenerator();
          var parsedData = nodeGenerator.DataParser(DataClass.data11);
@@ -19,7 +23,7 @@ namespace ConsoleApp5
          var djkstraResult1 = ModifiedDjikstra(nodeTree, comparisonType);
       }
 
-      private static void TestMultiple()
+            private static void TestMultiple()
       {
          var nodeGenerator = new NodeGenerator();
 

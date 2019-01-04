@@ -47,7 +47,8 @@
     <Compile Include="DijkstraSolver.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeGenerator.cs" />
-    <Compile Include="NodeSolver.cs" />
+    <Compile Include="BruteforceNodeSolver.cs" />
+    <Compile Include="NodeTree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreePrinter.cs" />
