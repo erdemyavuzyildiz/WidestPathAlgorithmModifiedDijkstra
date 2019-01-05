@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WidestPathAlgorithmForTriangleNumbers.Classes;
+using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
+using WidestPathAlgorithmForTriangleNumbers.Classes.ExampleData;
 
-namespace WidestPathAlgorithmForTriangleNumbers
+namespace WidestPathAlgorithmForTriangleNumbers.Tests
 {
    [TestClass]
    public class TreeWidestMaxPathTotalTests
@@ -9,10 +11,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example_smallTriangle()
       {
-         var nodeTree = ParseTestTree(DataClass.smallTriangle);
+         var nodeTree = ParseTestTree(DataClass.SmallTriangle);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -23,10 +25,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example_mediumTriangle()
       {
-         var nodeTree = ParseTestTree(DataClass.mediumTriangle);
+         var nodeTree = ParseTestTree(DataClass.MediumTriangle);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -37,10 +39,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example_bigTriangle()
       {
-         var nodeTree = ParseTestTree(DataClass.bigTriangle);
+         var nodeTree = ParseTestTree(DataClass.BigTriangle);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
 
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
          Assert.IsTrue(djkstraResult1 == 7273);
@@ -49,10 +51,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example4()
       {
-         var nodeTree = ParseTestTree(DataClass.data4);
+         var nodeTree = ParseTestTree(DataClass.Data4);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -63,10 +65,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example5()
       {
-         var nodeTree = ParseTestTree(DataClass.data5);
+         var nodeTree = ParseTestTree(DataClass.Data5);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -77,10 +79,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example6()
       {
-         var nodeTree = ParseTestTree(DataClass.data6);
+         var nodeTree = ParseTestTree(DataClass.Data6);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -91,10 +93,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example7()
       {
-         var nodeTree = ParseTestTree(DataClass.data7);
+         var nodeTree = ParseTestTree(DataClass.Data7);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -105,10 +107,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example8()
       {
-         var nodeTree = ParseTestTree(DataClass.data8);
+         var nodeTree = ParseTestTree(DataClass.Data8);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -119,10 +121,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example9()
       {
-         var nodeTree = ParseTestTree(DataClass.data9);
+         var nodeTree = ParseTestTree(DataClass.Data9);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -133,10 +135,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example10()
       {
-         var nodeTree = ParseTestTree(DataClass.data10);
+         var nodeTree = ParseTestTree(DataClass.Data10);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -147,10 +149,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example11()
       {
-         var nodeTree = ParseTestTree(DataClass.data11);
+         var nodeTree = ParseTestTree(DataClass.Data11);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -161,10 +163,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
       [TestMethod]
       public void Test_Example12()
       {
-         var nodeTree = ParseTestTree(DataClass.data12);
+         var nodeTree = ParseTestTree(DataClass.Data12);
          var print = nodeTree.Print();
 
-         var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+         var comparisonType = PathComparisonType.Longer;
          var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
          var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
@@ -184,10 +186,10 @@ namespace WidestPathAlgorithmForTriangleNumbers
          for (var i = 0; i < 1000; i++)
          {
             var randomData = nodeGenerator.RandomData(maxDepth, generatedNumberRangeStart, generatedNumberRangeEnd);
-            var nodeTree = new NodeTree(nodeGenerator.GenerateNodeTree(randomData));
+            var nodeTree = nodeGenerator.GenerateNodeTree(randomData);
             var printResult = nodeTree.Print();
 
-            var comparisonType = DijkstraSolver.DikstraComparisonType.Longer;
+            var comparisonType = PathComparisonType.Longer;
 
             var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
             var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
@@ -200,7 +202,7 @@ namespace WidestPathAlgorithmForTriangleNumbers
       {
          var nodeGenerator = new NodeGenerator();
          var parsedData = nodeGenerator.DataParser(dataString);
-         var nodeTree = new NodeTree(nodeGenerator.GenerateNodeTree(parsedData));
+         var nodeTree = nodeGenerator.GenerateNodeTree(parsedData);
          return nodeTree;
       }
    }

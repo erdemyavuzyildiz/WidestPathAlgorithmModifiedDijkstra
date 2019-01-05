@@ -1,35 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes
+namespace WidestPathAlgorithmForTriangleNumbers.Classes.Solvers
 {
    /// <summary>
    ///    Dijkstra Algorithm source
    ///    https://www.youtube.com/watch?v=pVfj6mxhdMw&t=241s
    /// </summary>
-   public class DijkstraSolver
+   public class DijkstraSolver : ISolver
    {
-      public enum DikstraComparisonType
-      {
-         Shorter,
-         Longer
-      }
-
-      public void UpdateTreeCostsByDepth(List<Node> nodes,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
-      {
-         nodes.First().Cost = nodes.First().Value;
-
-         var depths = nodes.GroupBy(z => z.Depth).Count();
-
-         for (var i = 0; i < depths; i++) UpdateTreeCostsByDepth(nodes, i, comparisonType);
-      }
-
-      public void FindParentPath(Node node,
-         List<Node> link,
-         List<List<Node>> allPaths,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      public void Solve(Node node,
+         List<Node> iterationPath,
+         List<List<Node>> resultPathsList,
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
          var parentNodes = node.ParentNodes.OrderBy(z => z.Cost).ToList();
 
@@ -38,39 +23,49 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
             Node targetParent;
             switch (comparisonType)
             {
-               case DikstraComparisonType.Shorter:
+               case PathComparisonType.Shorter:
                   targetParent = parentNodes[0];
                   break;
-               case DikstraComparisonType.Longer:
+               case PathComparisonType.Longer:
                   targetParent = parentNodes[parentNodes.Count - 1];
                   break;
                default:
                   throw new ArgumentOutOfRangeException(nameof(comparisonType), comparisonType, null);
             }
 
-            var localLink = link.ToList();
+            var localLink = iterationPath.ToList();
             localLink.Add(targetParent);
 
-            FindParentPath(targetParent, localLink, allPaths);
+            Solve(targetParent, localLink, resultPathsList);
          }
          else
-            allPaths.Add(link);
+            resultPathsList.Add(iterationPath);
+      }
+
+      public void UpdateTreeCostsByDepth(List<Node> nodes,
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
+      {
+         nodes.First().Cost = nodes.First().Value;
+
+         var depths = nodes.GroupBy(z => z.Depth).Count();
+
+         for (var i = 0; i < depths; i++) UpdateTreeCostsByDepth(nodes, i, comparisonType);
       }
 
       public void UpdateTreeCostsByDepth(List<Node> nodes,
          int targetDepth,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
          foreach (var node in nodes.Where(z => z.Depth == targetDepth))
             UpdateDijkstraNeighborsCosts(node, comparisonType);
       }
 
       public void UpdateDijkstraNeighborsCosts(Node node,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
          switch (comparisonType)
          {
-            case DikstraComparisonType.Shorter:
+            case PathComparisonType.Shorter:
                foreach (var nodeChildNode in node.ChildNodes.Where(x => !x.Visited))
                {
                   var currentNodeCost = nodeChildNode.Value + node.Cost;
@@ -80,7 +75,7 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
                }
 
                break;
-            case DikstraComparisonType.Longer:
+            case PathComparisonType.Longer:
                foreach (var nodeChildNode in node.ChildNodes.Where(x => !x.Visited))
                {
                   var currentNodeCost = nodeChildNode.Value + node.Cost;
@@ -95,8 +90,7 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
          }
       }
 
-      public List<Node> NextUnvisitedNodes(Node node,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Shorter)
+      public List<Node> NextUnvisitedNodes(Node node, PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
          List<Node> resultNode;
          var unvisitedNodes = node.ChildNodes.Where(x => !x.Visited).GroupBy(z => z.Cost).OrderBy(z => z.Key).ToList();
@@ -105,10 +99,10 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
 
          switch (comparisonType)
          {
-            case DikstraComparisonType.Shorter:
+            case PathComparisonType.Shorter:
                resultNode = unvisitedNodes[0].ToList();
                break;
-            case DikstraComparisonType.Longer:
+            case PathComparisonType.Longer:
                resultNode = unvisitedNodes[unvisitedNodes.Count - 1].ToList();
                break;
             default:
@@ -128,7 +122,7 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
       public void GetPathsDjkstra(Node node,
          List<Node> link,
          List<List<Node>> allPaths,
-         DikstraComparisonType comparisonType = DikstraComparisonType.Longer)
+         PathComparisonType comparisonType = PathComparisonType.Longer)
       {
          if (!node.ParentNodes.Any()) node.Cost = node.Value;
 

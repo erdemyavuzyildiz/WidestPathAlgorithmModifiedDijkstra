@@ -49,14 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BruteforceNodeSolver.cs" />
-    <Compile Include="Classes\DataClass.cs" />
-    <Compile Include="Classes\DijkstraSolver.cs" />
+    <Compile Include="Classes\Solvers\BruteforceNodeSolver.cs" />
+    <Compile Include="Classes\ExampleData\ExampleData.cs" />
+    <Compile Include="Classes\Solvers\DijkstraSolver.cs" />
     <Compile Include="Classes\Node.cs" />
     <Compile Include="Classes\NodeGenerator.cs" />
     <Compile Include="Classes\NodeTree.cs" />
-    <Compile Include="SolverMethods.cs" />
-    <Compile Include="TreeWidestMaxPathTotalTests.cs" />
+    <Compile Include="Classes\Enums\PathComparisonType.cs" />
+    <Compile Include="Classes\Solvers\ISolver.cs" />
+    <Compile Include="Classes\SolverMethods.cs" />
+    <Compile Include="Tests\TreeWidestMaxPathTotalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WidestPathAlgorithmForTriangleNumbers.Classes;
+using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
+using WidestPathAlgorithmForTriangleNumbers.Classes.Solvers;
 
-namespace WidestPathAlgorithmForTriangleNumbers
+namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
    public class SolverMethods
    {
       public static int ModifiedDjikstra(NodeTree treeData,
-         DijkstraSolver.DikstraComparisonType comparisonType = DijkstraSolver.DikstraComparisonType.Shorter)
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
          treeData.ResetCosts(comparisonType);
 
@@ -19,7 +20,7 @@ namespace WidestPathAlgorithmForTriangleNumbers
          var allPaths = new List<List<Node>>();
 
          var maxCostNode = treeData.Nodes.OrderByDescending(z => z.Cost).First();
-         dijkstraSolver.FindParentPath(maxCostNode, new List<Node> {maxCostNode}, allPaths, comparisonType);
+         dijkstraSolver.Solve(maxCostNode, new List<Node> {maxCostNode}, allPaths, comparisonType);
 
          var path = allPaths.First();
          path.Reverse();
@@ -27,24 +28,23 @@ namespace WidestPathAlgorithmForTriangleNumbers
          return path.Last().Cost;
       }
 
-      public static int Brute(NodeTree nodesTree,
-         DijkstraSolver.DikstraComparisonType comparisonType = DijkstraSolver.DikstraComparisonType.Longer)
+      public static int Brute(NodeTree nodesTree, PathComparisonType comparisonType = PathComparisonType.Longer)
       {
          var nodeSolver = new BruteforceNodeSolver();
 
          var allPaths = new List<List<Node>>();
          var firstNode = nodesTree.First();
 
-         nodeSolver.GetPathsBruteForce(firstNode, new List<Node> {nodesTree.First()}, allPaths);
+         nodeSolver.Solve(firstNode, new List<Node> {nodesTree.First()}, allPaths);
          var orderedPaths = allPaths.OrderBy(z => z.Sum(b => b.Value));
 
          List<Node> bestPath;
          switch (comparisonType)
          {
-            case DijkstraSolver.DikstraComparisonType.Shorter:
+            case PathComparisonType.Shorter:
                bestPath = orderedPaths.First();
                break;
-            case DijkstraSolver.DikstraComparisonType.Longer:
+            case PathComparisonType.Longer:
                bestPath = orderedPaths.Last();
                break;
             default:

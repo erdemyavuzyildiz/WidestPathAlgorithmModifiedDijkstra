@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
 
 namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
+   /// <summary>
+   ///    Complex unit representing tree graph
+   /// </summary>
    public class NodeTree : IEnumerable<Node>
    {
       public NodeTree(Node[] nodes)
@@ -40,6 +44,10 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
          return GetEnumerator();
       }
 
+      /// <summary>
+      ///    Create formatted string to visualise graph data
+      /// </summary>
+      /// <returns></returns>
       public string Print()
       {
          var grouped = Nodes.GroupBy(z => z.Depth).OrderBy(z => z.Key);
@@ -62,18 +70,22 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
          return stringBuilder.ToString();
       }
 
-      public void ResetCosts(DijkstraSolver.DikstraComparisonType comparisonType)
+      /// <summary>
+      ///    Reset Cost and Visited fields for given comparison type.
+      /// </summary>
+      /// <param name="comparisonType"></param>
+      public void ResetCosts(PathComparisonType comparisonType)
       {
          switch (comparisonType)
          {
-            case DijkstraSolver.DikstraComparisonType.Shorter:
+            case PathComparisonType.Shorter:
                Nodes.ForEach(z =>
                {
                   z.Cost = int.MaxValue;
                   z.Visited = false;
                });
                break;
-            case DijkstraSolver.DikstraComparisonType.Longer:
+            case PathComparisonType.Longer:
                Nodes.ForEach(z =>
                {
                   z.Cost = int.MinValue;

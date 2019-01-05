@@ -4,11 +4,19 @@ using System.Linq;
 
 namespace WidestPathAlgorithmForTriangleNumbers.Classes
 {
+   /// <summary>
+   ///    Generate or parse tree graph data using sources
+   /// </summary>
    public class NodeGenerator
    {
-      public int[] DataParser(string data)
+      /// <summary>
+      ///    Parse tree data from given string in a correct format
+      /// </summary>
+      /// <param name="stringData"></param>
+      /// <returns></returns>
+      public int[] DataParser(string stringData)
       {
-         var splitResult = data.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+         var splitResult = stringData.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
 
          var secondSplitResult = splitResult.SelectMany(firstSplit => firstSplit.Split(' '));
 
@@ -17,6 +25,13 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
          return dataArray.ToArray();
       }
 
+      /// <summary>
+      ///    Generate random tree data for given parameters
+      /// </summary>
+      /// <param name="depth"></param>
+      /// <param name="rangeStart"></param>
+      /// <param name="rangeEnd"></param>
+      /// <returns></returns>
       public int[] RandomData(int depth = 4, int rangeStart = 1, int rangeEnd = 5)
       {
          var random = new Random();
@@ -34,7 +49,12 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
          return randomData.ToArray();
       }
 
-      public List<Node> GenerateNodeTree(int[] dataArray)
+      /// <summary>
+      ///    Generate data from given data array and create correct child-parent relations
+      /// </summary>
+      /// <param name="dataArray"></param>
+      /// <returns></returns>
+      public NodeTree GenerateNodeTree(int[] dataArray)
       {
          if (dataArray == null || dataArray.Length <= 1)
             throw new ArgumentException("input data is invalid, not enough data or null.");
@@ -79,7 +99,7 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes
             for (var i = 0; i < groupData.Count; i++) groupData[i].Index = i;
          }
 
-         return allNodes;
+         return new NodeTree(allNodes);
       }
    }
 }
