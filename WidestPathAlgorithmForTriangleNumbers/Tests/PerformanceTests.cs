@@ -36,7 +36,7 @@ namespace ModifiedDijkstra.Tests.Tests
          var nodeGenerator = new NodeGenerator();
          var comparisonType = PathComparisonType.Longer;
 
-         for (var i = 3; i < 55; i++)
+         for (var i = 50; i < 300; i+=50)
          {
             var randomData = nodeGenerator.RandomData(i, 1, 1);
             var nodeTree = nodeGenerator.GenerateNodeTree(randomData);
