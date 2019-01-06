@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
+using System.Threading;
+using ModifiedDijkstra.Library.Enums;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes.Solvers
+namespace ModifiedDijkstra.Library.Solvers
 {
    /// <summary>
    ///    Dijkstra Algorithm source
@@ -12,10 +13,13 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes.Solvers
    public class DijkstraSolver : ISolver
    {
       public void Solve(Node node,
+         CancellationToken cancellationToken,
          List<Node> iterationPath,
          List<List<Node>> resultPathsList,
          PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
+         if (cancellationToken.IsCancellationRequested) return;
+
          var parentNodes = node.ParentNodes.OrderBy(z => z.Cost).ToList();
 
          if (parentNodes.Any())
@@ -36,7 +40,7 @@ namespace WidestPathAlgorithmForTriangleNumbers.Classes.Solvers
             var localLink = iterationPath.ToList();
             localLink.Add(targetParent);
 
-            Solve(targetParent, localLink, resultPathsList);
+            Solve(targetParent, cancellationToken, localLink, resultPathsList);
          }
          else
             resultPathsList.Add(iterationPath);

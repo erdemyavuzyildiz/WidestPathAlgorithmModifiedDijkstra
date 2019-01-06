@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes
+namespace ModifiedDijkstra.Library
 {
    /// <summary>
    ///    Basic unit for tree graph path calculations

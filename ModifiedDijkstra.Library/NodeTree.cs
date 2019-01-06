@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
+using ModifiedDijkstra.Library.Enums;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes
+namespace ModifiedDijkstra.Library
 {
    /// <summary>
    ///    Complex unit representing tree graph

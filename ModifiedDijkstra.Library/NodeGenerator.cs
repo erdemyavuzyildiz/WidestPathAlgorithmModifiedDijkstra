@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes
+namespace ModifiedDijkstra.Library
 {
    /// <summary>
    ///    Generate or parse tree graph data using sources

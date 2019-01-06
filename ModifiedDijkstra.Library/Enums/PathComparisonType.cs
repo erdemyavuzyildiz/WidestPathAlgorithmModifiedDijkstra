@@ -1,4 +1,4 @@
-﻿namespace WidestPathAlgorithmForTriangleNumbers.Classes.Enums
+﻿namespace ModifiedDijkstra.Library.Enums
 {
    public enum PathComparisonType
    {

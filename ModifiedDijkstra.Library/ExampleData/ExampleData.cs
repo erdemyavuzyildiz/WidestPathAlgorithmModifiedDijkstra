@@ -1,4 +1,4 @@
-﻿namespace WidestPathAlgorithmForTriangleNumbers.Classes.ExampleData
+﻿namespace ModifiedDijkstra.Library.ExampleData
 {
    public static class DataClass
    {

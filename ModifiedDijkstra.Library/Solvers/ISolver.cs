@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
-using WidestPathAlgorithmForTriangleNumbers.Classes.Enums;
+using System.Threading;
+using ModifiedDijkstra.Library.Enums;
 
-namespace WidestPathAlgorithmForTriangleNumbers.Classes.Solvers
+namespace ModifiedDijkstra.Library.Solvers
 {
    public interface ISolver
    {
       void Solve(Node node,
+         CancellationToken cancellationToken,
          List<Node> iterationPath,
          List<List<Node>> resultPathsList,
          PathComparisonType comparisonType = PathComparisonType.Shorter);
