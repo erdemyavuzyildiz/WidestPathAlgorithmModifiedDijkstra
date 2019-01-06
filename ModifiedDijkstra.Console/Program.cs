@@ -14,7 +14,7 @@ namespace ModifiedDijkstra.Console
       {
          var smallTriangleResult = SolveExample(DataClass.SmallTriangle, 23);
          var mediumTriangleResult = SolveExample(DataClass.MediumTriangle, 1074);
-         var bigTriangleResult = SolveExample(DataClass.BigTriangle, 7273,bruteForceTimeoutMilliseconds: 1000);
+         var bigTriangleResult = SolveExample(DataClass.BigTriangle, 7273, 1000);
       }
 
       private static BasicExampleResult SolveExample(string dataInput,

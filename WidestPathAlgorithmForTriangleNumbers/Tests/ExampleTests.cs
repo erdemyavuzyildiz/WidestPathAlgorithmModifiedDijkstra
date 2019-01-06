@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModifiedDijkstra.Library;
 using ModifiedDijkstra.Library.Enums;
 using ModifiedDijkstra.Library.ExampleData;
@@ -16,8 +15,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 21);
@@ -30,8 +29,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 23);
@@ -44,8 +43,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 12);
@@ -58,8 +57,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 67);
@@ -72,8 +71,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 13);
@@ -86,8 +85,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 16);
@@ -100,8 +99,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 30);
@@ -114,8 +113,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 7);
@@ -128,8 +127,8 @@ namespace ModifiedDijkstra.Tests.Tests
          var print = nodeTree.Print();
 
          var comparisonType = PathComparisonType.Longer;
-         var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+         var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+         var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
          Assert.IsTrue(bruteResult1 == djkstraResult1);
          Assert.IsTrue(bruteResult1 == 13);

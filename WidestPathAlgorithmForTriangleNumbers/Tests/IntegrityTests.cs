@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModifiedDijkstra.Library;
 using ModifiedDijkstra.Library.Enums;
 
@@ -25,8 +24,8 @@ namespace ModifiedDijkstra.Tests.Tests
 
             var comparisonType = PathComparisonType.Longer;
 
-            var bruteResult1 = SolverMethods.Brute(nodeTree,  comparisonType);
-            var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree,  comparisonType);
+            var bruteResult1 = SolverMethods.Brute(nodeTree, comparisonType);
+            var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, comparisonType);
 
             Assert.IsTrue(bruteResult1 == djkstraResult1);
          }

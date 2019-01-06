@@ -9,8 +9,7 @@ namespace ModifiedDijkstra.Library
 {
    public class SolverMethods
    {
-      public static int Brute(NodeTree nodesTree,
-         PathComparisonType comparisonType = PathComparisonType.Longer)
+      public static int Brute(NodeTree nodesTree, PathComparisonType comparisonType = PathComparisonType.Longer)
       {
          return Brute(nodesTree, new CancellationToken(), comparisonType);
       }
@@ -24,7 +23,7 @@ namespace ModifiedDijkstra.Library
          var allPaths = new List<List<Node>>();
          var firstNode = nodesTree.First();
 
-         nodeSolver.Solve(firstNode, cancellationToken, new List<Node> { nodesTree.First() }, allPaths);
+         nodeSolver.Solve(firstNode, cancellationToken, new List<Node> {nodesTree.First()}, allPaths);
          var orderedPaths = allPaths.OrderBy(z => z.Sum(b => b.Value));
 
          List<Node> bestPath;
@@ -44,16 +43,15 @@ namespace ModifiedDijkstra.Library
       }
 
       public static int ModifiedDjikstra(NodeTree treeData,
-                     PathComparisonType comparisonType = PathComparisonType.Shorter)
+         PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
-         return ModifiedDjikstra(treeData,new CancellationToken(),comparisonType);
+         return ModifiedDjikstra(treeData, new CancellationToken(), comparisonType);
       }
 
       public static int ModifiedDjikstra(NodeTree treeData,
          CancellationToken cancellationToken,
          PathComparisonType comparisonType = PathComparisonType.Shorter)
       {
-
          treeData.ResetCosts(comparisonType);
 
          var dijkstraSolver = new DijkstraSolver();

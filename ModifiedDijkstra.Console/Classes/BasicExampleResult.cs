@@ -9,6 +9,5 @@ namespace ModifiedDijkstra.Console.Classes
       public int? BruteResult { get; set; } = null;
       public int? DijkstraResult { get; set; } = null;
       public int ExpectedResult { get; set; }
-
    }
 }
