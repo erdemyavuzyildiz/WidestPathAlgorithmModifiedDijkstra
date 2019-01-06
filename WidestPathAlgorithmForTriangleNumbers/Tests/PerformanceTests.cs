@@ -36,14 +36,21 @@ namespace ModifiedDijkstra.Tests.Tests
          var nodeGenerator = new NodeGenerator();
          var comparisonType = PathComparisonType.Longer;
 
-         for (var i = 50; i < 300; i+=50)
+         for (var i = 50; i < 500; i+=50)
          {
             var randomData = nodeGenerator.RandomData(i, 1, 1);
             var nodeTree = nodeGenerator.GenerateNodeTree(randomData);
 
+            var orderedTree=nodeTree.GetNodesAtDepth(i-1);
+
+            orderedTree[0].Value=2;
+            orderedTree.Last().Value=3;
+
             stopwatch.Restart();
-            SolverMethods.ModifiedDjikstra(nodeTree, new CancellationToken(), comparisonType);
+            var dijkstraResult= SolverMethods.ModifiedDjikstra(nodeTree, new CancellationToken(), comparisonType);
             stopwatch.Stop();
+
+            Assert.IsTrue(dijkstraResult==orderedTree.Last().Value+i-1);
 
             performanceData.Add((i, stopwatch.ElapsedMilliseconds));
          }

@@ -21,7 +21,7 @@ namespace ModifiedDijkstra.Library
       public int Cost { get; set; }
 
       /// <summary>
-      ///    Level from top in a tree graph starting from 1
+      ///    Level from top in a tree graph starting from 0
       /// </summary>
       public int Depth { get; set; }
 

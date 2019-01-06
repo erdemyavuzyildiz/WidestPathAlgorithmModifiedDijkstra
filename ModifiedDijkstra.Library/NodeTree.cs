@@ -44,6 +44,10 @@ namespace ModifiedDijkstra.Library
          return GetEnumerator();
       }
 
+      public List<Node> GetNodesAtDepth(int depth)
+      {
+         return this.Where(z=>z.Depth==depth).OrderBy(z=>z.Index).ToList();
+      }
       /// <summary>
       ///    Create formatted string to visualise graph data
       /// </summary>
