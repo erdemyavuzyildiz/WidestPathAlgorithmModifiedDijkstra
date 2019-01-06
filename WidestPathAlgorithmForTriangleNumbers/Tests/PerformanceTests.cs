@@ -42,7 +42,7 @@ namespace ModifiedDijkstra.Tests.Tests
             var nodeTree = nodeGenerator.GenerateNodeTree(randomData);
 
             stopwatch.Restart();
-            var djkstraResult1 = SolverMethods.ModifiedDjikstra(nodeTree, new CancellationToken(), comparisonType);
+            SolverMethods.ModifiedDjikstra(nodeTree, new CancellationToken(), comparisonType);
             stopwatch.Stop();
 
             performanceData.Add((i, stopwatch.ElapsedMilliseconds));
